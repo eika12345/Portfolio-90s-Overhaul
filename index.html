@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>90's Overhaul</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="https://unpkg.com/98.css"
+>
+</head>
+
+<!--body------------------------------------------------------------------------------------------------>
+<body>
+<!--<div class="window" style="width: 60%">
+          <div class="title-bar">
+  <div class="title-bar-left">
+    <img src="./images/windows98logo.svg" alt="Win98 logo" />
+    <div class="title-bar-text">Welcome to Windows 98</div>
+  </div>
+  <div class="title-bar-controls">
+    <button aria-label="Minimize"></button>
+    <button aria-label="Maximize"></button>
+    <button aria-label="Close"></button>
+  </div>
+</div>
+        <div class="window-body">
+          <div class="window-body-section-title">
+            <h4> Erikas Petrauskas</h4>
+          </div>
+          <div class="window-body-section-country">
+             <p>Lithuania</p>
+            <img src="./images/pin.png" alt="pin">
+
+          </div>
+          <div class="window-body-section">
+              <p>Hi there. I'm a full-stack web developer that specializes in making websites different from the standard formula everyone seemingly follows these days.</p>
+          </div>
+        </div>    
+    </div>-->
+
+<div class="window" id="myWindow">
+  <div class="title-bar" onmousedown="startDrag(event, 'myWindow')">
+    <span>Welcome to Windows 98</span>
+     <div class="title-bar-controls">
+    <button aria-label="Minimize"></button>
+    <button aria-label="Maximize"></button>
+    <button aria-label="Close" onclick="closeWindow('myWindow')"></button>
+  </div>
+  </div>
+  
+ <div class="window-body">
+          <div class="window-body-section-title">
+            <h4> Erikas Petrauskas</h4>
+          </div>
+          <div class="window-body-section-country">
+             <p>Lithuania</p>
+            <img src="./images/pin.png" alt="pin">
+
+          </div>
+          <div class="window-body-section">
+              <p>Hi there. I'm a full-stack web developer that specializes in making websites different from the standard formula everyone seemingly follows these days.</p>
+          </div>
+        </div>    
+    </div>
+  
+    
+ <!-- Taskbar Footer ------------------------------------------------------------------------------------->
+  <div class="taskbar">
+    
+    <button class="start-button" onclick="toggleMenu()">
+          <img src="./images/windows98logo.png" alt="Start Icon" class="start-icon">
+      Start</button> 
+    <ul id="start-menu" class="start-menu hidden">
+  <div class="start-stripe">
+    <img src="./images/windows98stripe.png" alt="Windows 98 Stripe" class="stripe-img">
+  </div>
+  <div>
+
+      <a href="https://eikasden.com//" target="_blank" style="text-decoration: none; color: inherit;">
+    <li><img src="./images/e.d.png" class="menu-icon">Eika's Den</li>
+    </a>
+
+  <a href="https://www.erikaspetrauskas.com/" target="_blank" style="text-decoration: none; color: inherit;">
+        <li><img src="./images/erikaspetrauskas.png" class="menu-icon">Erikas Petrauskas</li>
+    </a>
+
+      <a href="https://github.com/eika12345" target="_blank" style="text-decoration: none; color: inherit;">
+    <li><img src="./images/github.png" class="menu-icon">Github</li>
+    </a>
+
+          <a href="https://www.instagram.com/erikas.2005/" target="_blank" style="text-decoration: none; color: inherit;">
+    <li><img src="./images/instagram.png" class="menu-icon">Instagram</li>
+    </a>
+    <li onclick="openBiography(event)" style="cursor: pointer;">
+  <img src="./images/computer.png" class="menu-icon">Biography
+</li>
+    <li><img src="./images/drawing.png" class="menu-icon">Drawings</li>
+    
+
+<a href="ErikasPetrauskasCVmain.pdf" target="_blank" style="text-decoration: none; color: inherit;">
+    <li><img src="./images/cv.png" class="menu-icon"> CV</li>
+    </a>
+    </li>
+  </div>
+</ul>
+
+    <div class="taskbar-items">       
+      <button class="start-button" onclick="openWindow('myWindow')">
+  <img src="./images/computer.png" alt="Computer Icon" class="start-icon"> Biography
+</button>
+    </div>
+    <div class="taskbar-clock" id="clock">--:--</div>
+  </div>
+
+
+
+
+
+
+
+  <script>
+    function openBiography(event) {
+  event.stopPropagation(); // Prevent the global click listener from closing the menu
+  openWindow('myWindow');
+
+  const startMenu = document.getElementById('start-menu');
+  startMenu.classList.add('hidden');
+}
+    function openWindow(id) {
+  console.log("Opening window:", id);
+  const win = document.getElementById(id);
+  win.classList.remove('hidden');
+  win.style.zIndex = 1000;
+
+   // Set default position (e.g., 100px from top, 200px from left)
+  win.style.left = '500px';
+  win.style.top = '500px';
+
+  // 👉 Hide the Start menu
+  const startMenu = document.getElementById('start-menu');
+  startMenu.classList.add('hidden');
+}
+
+
+function openWindow(id) {
+  document.getElementById(id).classList.remove('hidden');
+}
+function closeWindow(id) {
+  document.getElementById(id).classList.add('hidden');
+}
+function openWindow(id) {
+  console.log("Opening window:", id); // <--- test line
+  const win = document.getElementById(id);
+  win.classList.remove('hidden');
+  win.style.zIndex = 1000;
+}
+
+    function updateClock() {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function toggleMenu() {
+    const menu = document.getElementById('start-menu');
+    menu.classList.toggle('hidden');
+  }
+
+  // Optional: hide the menu if clicked outside
+  document.addEventListener('click', function (e) {
+    const menu = document.getElementById('start-menu');
+    const button = document.querySelector('.start-button');
+    if (!menu.contains(e.target) && !button.contains(e.target)) {
+      menu.classList.add('hidden');
+    }
+  });
+  
+  let dragData = null;
+
+function startDrag(e, id) {
+  const element = document.getElementById(id);
+  dragData = {
+    element,
+    offsetX: e.clientX - element.offsetLeft,
+    offsetY: e.clientY - element.offsetTop
+  };
+
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('mouseup', stopDrag);
+}
+
+function drag(e) {
+  if (!dragData) return;
+  const { element, offsetX, offsetY } = dragData;
+  element.style.left = `${e.clientX - offsetX}px`;
+  element.style.top = `${e.clientY - offsetY}px`;
+}
+
+function stopDrag() {
+  document.removeEventListener('mousemove', drag);
+  document.removeEventListener('mouseup', stopDrag);
+  dragData = null;
+}
+
+function closeWindow(id) {
+  document.getElementById(id).classList.add('hidden'); 
+}
+
+  </script>
+</body>
+</html>
